@@ -1,32 +1,36 @@
 
 import random
 from visuals import lives_visual_dict
-l = ["mumbai", "pune", "pradesh", "vashi"]
+list_of_word = ["mumbai", "pune", "pradesh", "vashi"]
+
+print("Lets play hangman !!!")
+print("Fill up the hyphens ! \n")
 
 
 def play():
-    word = random.choice(l)
+    word = random.choice(list_of_word)
     lives = 0
-    li = []
+    guesses = []
     done = False
 
     while not done:
-        for i in word:
-            if i in li:
-                print(i, end="")
+        for letter in word:
+            if letter in guesses:
+                print(letter, end=" ")
             else:
                 print("-", end=" ")
 
-        print("")
+        print("\n")
 
-        en = input("enter the letter :: ").lower()
-        li.append(en)
+        guess_letter = input("guess the letter :: ").lower()
+        guesses.append(guess_letter)
 
-        if en not in word:
+        if guess_letter not in word:
             lives = lives + 1.
             if lives < 6:
                 print(lives_visual_dict[lives])
-                print("guess the correct word")
+                print(
+                    f"guess the correct letter {int(6-lives)} chances left. ")
             if lives == 6:
                 print("you lost the game\n")
                 print("word was : " + word)
@@ -36,22 +40,20 @@ def play():
                 else:
                     exit()
 
-        for m in word:
-            if m not in li:
+        for letter in word:
+            if letter not in guesses:
                 done = False
             else:
                 done = True
 
     if done:
-        print("hey you won")
+        print("hey you won :) ")
         print("word is :: " + word)
-        n = input("do u want to play again :: ").upper()
+        n = input("do u want to play again ? ::  ").upper()
         if n == "YES":
             play()
         else:
             exit()
-    else:
-        print("fuck u")
 
 
 play()
