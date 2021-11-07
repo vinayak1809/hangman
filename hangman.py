@@ -23,6 +23,10 @@ def play():
         print("\n")
 
         guess_letter = input("guess the letter :: ").lower()
+
+        if guess_letter in guesses:
+            print(f"letter '{guess_letter.upper()}' is already guessed")
+
         guesses.append(guess_letter)
 
         if guess_letter not in word:
@@ -31,6 +35,7 @@ def play():
                 print(lives_visual_dict[lives])
                 print(
                     f"guess the correct letter {int(6-lives)} chances left. ")
+
             if lives == 6:
                 print("you lost the game\n")
                 print("word was : " + word)
@@ -49,7 +54,7 @@ def play():
     if done:
         print("hey you won :) ")
         print("word is :: " + word)
-        n = input("do u want to play again ? ::  ").upper()
+        n = input("do u want to play again ? :: ").upper()
         if n == "YES":
             play()
         else:
